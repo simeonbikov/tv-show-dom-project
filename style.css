@@ -1,3 +1,11 @@
 #root {
-  color: red;
+  color: #000;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.highlight {
+  background-color: yellow;
 }
