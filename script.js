@@ -27,7 +27,7 @@ function makePageForEpisodes(episodeList) {
     const nameSeasonEpisodeBox = document.createElement("div");
     episodeBox.appendChild(nameSeasonEpisodeBox);
     const nameSeasonEpisode = document.createElement("h3");
-        // nameSeasonEpisode.classList.add("name-season-episode");
+        nameSeasonEpisode.classList.add("name-season-episode");
     const episodeSeason =
       episode.season < 10 ? "0" + episode.season : episode.season;
     const episodeNumber =
@@ -44,28 +44,64 @@ function makePageForEpisodes(episodeList) {
 
     const episodeSummaryBox = document.createElement("div");
     episodeSummaryBox.innerHTML = episode.summary;
-        // episodeSummaryBox.childNodes[0].classList.add("episode-summary-text");
+        episodeSummaryBox.childNodes[0].classList.add("episode-summary-text");
     episodeBox.appendChild(episodeSummaryBox);
   });
 }
 
 
 function search() {
-  let episodeBoxes = document.querySelectorAll('.episode-box')
-  // Array.from(episodeBoxes).filter((episode) => 
+  let episodeBoxes = document.querySelectorAll(".episode-box");
+  let episodeName = document.getElementsByClassName("name-season-episode");
+  let episodeSummary = document.getElementsByClassName("episode-summary-text");
+  // Array.from(episodeBoxes).filter((episode) =>
   //   !episode.innerText.toLowerCase().includes(input.toLowerCase()))
   //   .forEach((episode) => episode.classList.add("is-hidden"));
   // console.log(bx);
   let input = document.getElementById("searchbar").value;
   for (var i = 0; i < episodeBoxes.length; i++) {
-    if(episodeBoxes[i].innerText.toLowerCase().includes(input.toLowerCase())) {
+    // if (input === "") episodeName[i].innerHTML.textContent;
+    if (episodeName[i].innerText.toLowerCase().includes(input.toLowerCase()) ||
+      episodeSummary[i].innerText.toLowerCase().includes(input.toLowerCase())) {
       episodeBoxes[i].classList.remove("is-hidden");
-      // highlight(episodeBoxes[i], input);
+      // episodeName[i].innerHTML.textContent;
+      highlighter(episodeName[i], input);
+      highlighter(episodeSummary[i], input);
     } else {
       episodeBoxes[i].classList.add("is-hidden");
     }
   }
 }
+
+// function highlighter(episode, searched) {
+//   episode.innerHTML.textContent;
+//   if (searched !== "") {
+//     let re = new RegExp(searched, "g");
+//     let newText = episode.innerText.replace(re, `<mark>${searched}</mark>`);
+//     episode.innerHTML = newText;
+//     console.log(newText);
+//   }
+// }
+
+function highlighter(episode, searched) {
+  episode.innerText.textContent;
+  // if (searched !== "") {
+    let reg = new RegExp(searched, "gi");
+    episode.innerHTML = episode.innerText.replace(reg, function (str) {
+      return "<mark>" + str + "</mark>";
+    });
+  // }
+}
+
+// function highlight(episode, text) {
+//   let inputText = text;
+//   let innerHTML = episode.innerHTML;
+//   // var index = innerHTML.indexOf(text);
+//   // if (index >= 0) { 
+//    innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+//   //  inputText.innerHTML = innerHTML;
+//   // }
+// }
 
 // function highlight(episode, text) {
 //   episode.replace(text,"<span>text</span>");
