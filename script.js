@@ -15,8 +15,6 @@ function setup() {
   countDisplayedEpisodes();
 }
 
-// let episodesCounter;
-
 function countDisplayedEpisodes() {
   let displayedEpisodes =
     allEpisodes.length - document.querySelectorAll(".is-hidden").length;
@@ -26,7 +24,6 @@ function countDisplayedEpisodes() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
   episodeList.forEach((episode) => {
     const episodeBox = document.createElement("div");
     episodeBox.classList.add("episode-box");
