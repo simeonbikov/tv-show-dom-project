@@ -1,33 +1,41 @@
-//You can edit ALL of the code here
+const allEpisodes = getAllEpisodes();
+
 function setup() {
-  const allEpisodes = getAllEpisodes();
+  // const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   // console.log(allEpisodes.name);
   // allEpisodes.forEach(e => console.log(e.name));
 
-  document.getElementById("clearBtn").addEventListener("click",() =>
-  (document.getElementById("searchbar").value = ""));
+  document.getElementById("clearBtn").addEventListener("click",() => 
+  document.getElementById("searchbar").value = "");
 
   const searchInput = document.getElementById("searchbar");
   searchInput.addEventListener("input", search);
 
+  countDisplayedEpisodes();
 }
 
+// let episodesCounter;
 
+function countDisplayedEpisodes() {
+  let displayedEpisodes =
+    allEpisodes.length - document.querySelectorAll(".is-hidden").length;
+  document.getElementById("displayNumOfEpisodes").innerText = 
+    `Displaying ${displayedEpisodes}/${allEpisodes.length} episodes`;
+}
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-
   episodeList.forEach((episode) => {
     const episodeBox = document.createElement("div");
-      episodeBox.classList.add("episode-box");
+    episodeBox.classList.add("episode-box");
     rootElem.appendChild(episodeBox);
 
     const nameSeasonEpisodeBox = document.createElement("div");
     episodeBox.appendChild(nameSeasonEpisodeBox);
     const nameSeasonEpisode = document.createElement("h3");
-        nameSeasonEpisode.classList.add("name-season-episode");
+    nameSeasonEpisode.classList.add("name-season-episode");
     const episodeSeason =
       episode.season < 10 ? "0" + episode.season : episode.season;
     const episodeNumber =
@@ -44,11 +52,10 @@ function makePageForEpisodes(episodeList) {
 
     const episodeSummaryBox = document.createElement("div");
     episodeSummaryBox.innerHTML = episode.summary;
-        episodeSummaryBox.childNodes[0].classList.add("episode-summary-text");
+    episodeSummaryBox.childNodes[0].classList.add("episode-summary-text");
     episodeBox.appendChild(episodeSummaryBox);
   });
 }
-
 
 function search() {
   let episodeBoxes = document.querySelectorAll(".episode-box");
@@ -60,17 +67,18 @@ function search() {
   // console.log(bx);
   let input = document.getElementById("searchbar").value;
   for (var i = 0; i < episodeBoxes.length; i++) {
-    // if (input === "") episodeName[i].innerHTML.textContent;
-    if (episodeName[i].innerText.toLowerCase().includes(input.toLowerCase()) ||
-      episodeSummary[i].innerText.toLowerCase().includes(input.toLowerCase())) {
+    if (
+      episodeName[i].innerText.toLowerCase().includes(input.toLowerCase()) ||
+      episodeSummary[i].innerText.toLowerCase().includes(input.toLowerCase())
+    ) {
       episodeBoxes[i].classList.remove("is-hidden");
-      // episodeName[i].innerHTML.textContent;
       highlighter(episodeName[i], input);
       highlighter(episodeSummary[i], input);
     } else {
       episodeBoxes[i].classList.add("is-hidden");
     }
   }
+  countDisplayedEpisodes();
 }
 
 // function highlighter(episode, searched) {
@@ -86,10 +94,10 @@ function search() {
 function highlighter(episode, searched) {
   episode.innerText.textContent;
   // if (searched !== "") {
-    let reg = new RegExp(searched, "gi");
-    episode.innerHTML = episode.innerText.replace(reg, function (str) {
-      return "<mark>" + str + "</mark>";
-    });
+  let reg = new RegExp(searched, "gi");
+  episode.innerHTML = episode.innerText.replace(reg, function (str) {
+    return "<mark>" + str + "</mark>";
+  });
   // }
 }
 
@@ -97,7 +105,7 @@ function highlighter(episode, searched) {
 //   let inputText = text;
 //   let innerHTML = episode.innerHTML;
 //   // var index = innerHTML.indexOf(text);
-//   // if (index >= 0) { 
+//   // if (index >= 0) {
 //    innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
 //   //  inputText.innerHTML = innerHTML;
 //   // }
@@ -107,18 +115,15 @@ function highlighter(episode, searched) {
 //   episode.replace(text,"<span>text</span>");
 // }
 
-
 // const searchInput = document.getElementById("searchbar");
 // searchInput.addEventListener("input", e => {
 //   const input = e.target.value.toLowerCase();
 //   console.log(input);
 //   });
 
-
-
-  // searchSeries();
-      // input = input.toLowerCase();
-      // console.log(input);
+// searchSeries();
+// input = input.toLowerCase();
+// console.log(input);
 //       let box = document.getElementsByClassName("episode-box");
 //       let name = document.getElementsByClassName("name-season-episode");
 //       let summary = document.getElementsByClassName("episode-summary-text");
@@ -137,8 +142,8 @@ function highlighter(episode, searched) {
 
 // function searchSeries() {
 
-    // let input = document.getElementById("searchbar").value;
-    // input = input.toLowerCase();
+// let input = document.getElementById("searchbar").value;
+// input = input.toLowerCase();
 //     let box = document.getElementsByClassName("episode-box");
 //     let name = document.getElementsByClassName("name-season-episode");
 //     let summary = document.getElementsByClassName("episode-summary-text");
