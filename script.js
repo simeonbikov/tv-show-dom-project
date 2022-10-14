@@ -53,9 +53,9 @@ function makeSelectorForEpisodes(episodeList) {
   });
 
   selectEpisode.addEventListener("change", (selectedEl) => {
-    if (selectedEl === null) {
+    if (selectedEl === null)
       console.warn("could not find element using id: " + selectedEl.id);
-    } else if (selectedEl.target.value === "none") searchBar.value = "";
+    // if (selectedEl.target.value === "none") searchBar.value = "";
     allEpisodes.forEach((episode) => {
       const elem = document.getElementById(episode.id);
       selectedEl.target.value !== elem.id
@@ -93,24 +93,19 @@ let searchItem = () => {
     showEpisodes.forEach((elem) => {
       const element = document.getElementById(elem.id);
       if (element === null) {
-        // This should not happen, it should always be an element
         console.warn("could not find element using id: " + elem.id);
       } else {
         element.classList.remove("is-hidden");
-        // highlighter(elem.childNodes[0], searchText);
-        // highlighter(elem.childNodes[2], searchText);
       }
     });
     hideEpisodes.forEach((elem) => {
       const element = document.getElementById(elem.id);
       if (element === null) {
-        // This should not happen, it should always be an element
         console.warn("could not find element using id: " + elem.id);
       } else {
         element.classList.add("is-hidden");
       }
     });
-    //   highlighter(episodeName, searchText);
   });
 };
 

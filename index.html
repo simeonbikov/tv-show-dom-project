@@ -9,14 +9,12 @@
   </head>
 
   <body>
-
+  <nav class="navigation">
     <select name="select-episode" id="selectEpisodeList">
-      <option value="none">All episodes</option>
-      <!-- <option value="blue">Blue t-shirt</option>
-      <option value="orange">Orange t-shirt</option> -->
+      <!-- <option value="none">All episodes</option> -->
     </select>
 
-    <form class="form">
+    <form class="form-selectbar">
       <input id="searchbar" type="text" class="input" placeholder="search..."/>
       <button id="clearBtn" class="clear-btn">clear</button>
     </form>
@@ -24,17 +22,18 @@
     <div>
       <p id="displayNumOfEpisodes"></p>
     </div>
-
-    <div id="root"></div>
-
+  </nav>
+  
+  <main class="container">
+    <div id="root" class="content">
+    </div>
+  </main>
+  
   <footer>
     <p>This content is from https://www.tvmaze.com/</p>
   </footer>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>
