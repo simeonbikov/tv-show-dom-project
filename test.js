@@ -40,12 +40,35 @@
 // }
 
 
-var querystr = "ca";
-var result = "Calculator";
-var reg = new RegExp(querystr, "gi");
-var final_str =
-  "foo " +
-  result.replace(reg, function (str) {
-    return "<b>" + str + "</b>";
-  });
-$("#id").html(final_str);
+// var querystr = "ca";
+// var result = "Calculator";
+// var reg = new RegExp(querystr, "gi");
+// var final_str =
+//   "foo " +
+//   result.replace(reg, function (str) {
+//     return "<b>" + str + "</b>";
+//   });
+// $("#id").html(final_str);
+
+
+// function myFunction() {
+//   var myObject = {
+//     objProperty: "string",
+//     objMethod: function() {
+//       const key = Object.keys(myObject).find((key) => myObject[key] === this.objProperty);
+//       return key + ":" + this.objProperty +",";
+// 		}
+//   }
+  
+//   return myObject.objMethod();
+// };
+
+// console.log(myFunction());
+
+// function removeChar(str){
+//  return str.length <= 2 str : str.slice(1, -1);
+
+// };
+
+// txt = "E02S04";
+// console.log(txt.toLowerCase());
