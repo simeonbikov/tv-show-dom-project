@@ -26,27 +26,31 @@ const getAllShows = () => {
     .catch((err) => console.log(err.message));
 }
 
-// const getAllEpisodes = (showId) => {
-//   fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
-//     .then((response) => {
-//       if (response.status >= 200 && response.status <= 299) {
-//         return response.json();
-//       } else {
-//         throw new Error(`Encountered something unexpected: ${response.status} ${response.statusText}`);
-//       }
-//     })
-//     .then((data) => allEpisodes = data)
-//     .catch((err) => console.log(err.message));
-// }
+const getAllEpisodes = (showId) => {
+  fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
+    .then((response) => {
+      if (response.status >= 200 && response.status <= 299) {
+        return response.json();
+      } else {
+        throw new Error(`Encountered something unexpected: ${response.status} ${response.statusText}`);
+      }
+    })
+    .then((data) => {
+      allEpisodes = data;
+      makePageForEpisodes(allEpisodes);
+    })
+    .catch((err) => console.log(err.message));
+}
 
 const makePageForShows = (shows) => {
   shows.forEach((show) => {
     const showBox = document.createElement("div");
-    showBox.classList.add("show-box");
+    // showBox.classList.add("show-box");
     showBox.id = show.id;
 
     const titleShowBox = document.createElement("div");
     const titleShow = document.createElement("a");
+    // titleShow.href = ""
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
 
@@ -85,37 +89,82 @@ const makePageForShows = (shows) => {
     infoShowList.append(ratingShow, genresShow, statusShow, runtimeShow);
   });
 }
+//work:
+function makePageForEpisodes(episodes) {
+  episodes.forEach((episode) => {
+    const episodeBox = document.createElement("div");
+    // episodeBox.classList.add("episode-box");
+    episodeBox.id = episode.id;
 
-  function makeSelectorForShows(shows) {
-    const selectShow = document.getElementById("selectShow");
-    shows.forEach((show) => {
-      const optionShow = document.createElement("option");
-      optionShow.value = show.id;
-      optionShow.innerText = show.name;
-      selectShow.appendChild(optionShow);
-    });
+    const titleEpisodeBox = document.createElement("div");
+    const nameSeasonEpisode = document.createElement("h3");
+    nameSeasonEpisode.classList.add("episode-title");
+    nameSeasonEpisode.innerText = `${episode.name} - S${numFormatter(episode.season)}E${numFormatter(episode.number)}`;
 
-    selectShow.addEventListener("change", (selectedEl) => {
-      if (selectedEl === null)
-        console.warn("could not find element using id: " + selectedEl.id);
-      // if (selectedEl.target.value === "none") searchBar.value = "";
+    const imgEpisodeBox = document.createElement("div");
+    const imgEpisode = document.createElement("img");
+    imgEpisode.src = episode.image.medium;
+    imgEpisode.alt = `image of episode - ${episode.name}`;
+
+    const summaryEpisodeBox = document.createElement("div");
+    const summaryEpisode = document.createElement("p");
+    summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");
+    summaryEpisode.classList.add("episode-summary");
+
+    if (rootElem) rootElem.append(episodeBox);
+    episodeBox.append(titleEpisodeBox, imgEpisodeBox, summaryEpisodeBox);
+    titleEpisodeBox.append(nameSeasonEpisode);
+    imgEpisodeBox.append(imgEpisode);
+    summaryEpisodeBox.append(summaryEpisode);
+  });
+}
+
+function makeSelectorForShows(shows) {
+  const selectShow = document.getElementById("selectShow");
+  shows.forEach((show) => {
+    const optionShow = document.createElement("option");
+    optionShow.value = show.id;
+    optionShow.innerText = show.name;
+    selectShow.appendChild(optionShow);
+  });
+  selectShow.addEventListener("change", (selectedEl) => {
+    if (selectedEl === null)
+      console.warn("could not find element using id: " + selectedEl.id);
+    if (selectedEl.target.value === "all") {
+      showElements(shows);
+    } else {
       hideElements(shows);
-    });
-  }
+      // hideElements(allEpisodes);
+      showId = selectedEl.target.value;
+      getAllEpisodes(showId);
+      // if (!showId) hideElements(allEpisodes);
+    }
+  });
+}
 
-  const hideElements = (elements) => {
-    elements.forEach((elem) => {
-      const element = document.getElementById(elem.id);
-       if (element === null) {
-        console.warn("could not find element using id: " + elem.id);
-      } else {
-        element.classList.add("is-hidden");
-      }
-    });
-  }
+const hideElements = (elements) => {
+  elements.forEach((elem) => {
+    const element = document.getElementById(elem.id);
+    if (element === null) {
+      console.warn("could not find element using id: " + elem.id);
+    } else {
+      element.classList.add("is-hidden");
+    }
+  });
+}
 
+const showElements = (elements) => {
+  elements.forEach((elem) => {
+    const element = document.getElementById(elem.id);
+    if (element === null) {
+      console.warn("could not find element using id: " + elem.id);
+    } else {
+      element.classList.remove("is-hidden");
+    }
+  });
+}
 
-
+const numFormatter = (number) => (number < 10 ? "0" + number : number);
 
   //=====================================
 

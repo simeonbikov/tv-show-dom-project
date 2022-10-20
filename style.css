@@ -19,13 +19,13 @@
   align-content: center; */
 }
 
-.episode-box {
+/* .episode-box { */
   /* width: 250px; */
-  margin: 20px;
+  /* margin: 20px; */
   /* display: flex;
   flex-direction: column;
   align-content: center; */
-}
+/* } */
 
 .is-hidden {
   display: none;
@@ -35,10 +35,10 @@
   background-color: yellow;
 }
 
-.show-box {
+/* .show-box {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .content-show-box {
   display: flex;
