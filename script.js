@@ -5,8 +5,9 @@ let allShows = [];
 let allEpisodes = [];
 let showId = 0;
 
-function setup() {
+const setup = () => {
   getAllShows();
+  searchItem();
 }
 
 window.onload = setup;
@@ -183,27 +184,70 @@ const makeSelectorForEpisodes = (episodes) => {
     });
   }
 
-// const hideElements = (elements) => {
-//   elements.forEach((elem) => {
-//     const element = document.getElementById(elem.id);
-//     if (element === null) {
-//       console.warn("could not find element using id: " + elem.id);
-//     } else {
-//       element.classList.add("is-hidden");
-//     }
-//   });
-// }
+const matchesSearchText = (movie, targetItem) => {
+  return (
+    movie.name.toLowerCase().includes(targetItem) ||
+    movie.summary.toLowerCase().includes(targetItem)
+  );
+};
 
-// const showAllElements = (elements) => {
-//   elements.forEach((elem) => {
-//     const element = document.getElementById(elem.id);
-//     if (element === null) {
-//       console.warn("could not find element using id: " + elem.id);
-//     } else {
-//       element.classList.remove("is-hidden");
-//     }
-//   });
-// }
+let searchItem = () => {
+  let searchBar = document.getElementById("searchbar");
+  if (!searchBar) return;
+  searchBar.addEventListener("input", (e) => {
+    if (e.target === null) return;
+    if (!(e.target instanceof HTMLInputElement)) return;
+
+    let searchText = e.target.value;
+
+    let displayEpisodes = allEpisodes.filter((episode) => {
+      return matchesSearchText(episode, searchText.toLowerCase());
+    });
+    let hideEpisodes = allEpisodes.filter((episode) => {
+      return !matchesSearchText(episode, searchText.toLowerCase());
+    });
+
+    let displayShows = allShows.filter((show) => {
+      return matchesSearchText(show, searchText.toLowerCase());
+    });
+    let hideShows = allShows.filter((show) => {
+      return !matchesSearchText(show, searchText.toLowerCase());
+    });
+
+    displayEpisodes.forEach((elem) => {
+      const element = document.getElementById(elem.id);
+      if (element === null) {
+        console.warn("could not find element using id: " + elem.id);
+      } else {
+        element.classList.remove("is-hidden");
+      }
+    });
+    hideEpisodes.forEach((elem) => {
+      const element = document.getElementById(elem.id);
+      if (element === null) {
+        console.warn("could not find element using id: " + elem.id);
+      } else {
+        element.classList.add("is-hidden");
+      }
+    });
+    displayShows.forEach((elem) => {
+      const element = document.getElementById(elem.id);
+      if (element === null) {
+        console.warn("could not find element using id: " + elem.id);
+      } else {
+        element.classList.remove("is-hidden");
+      }
+    });
+    hideShows.forEach((elem) => {
+      const element = document.getElementById(elem.id);
+      if (element === null) {
+        console.warn("could not find element using id: " + elem.id);
+      } else {
+        element.classList.add("is-hidden");
+      }
+    });
+  });
+};
 
 const numFormatter = (number) => (number < 10 ? "0" + number : number);
 
@@ -334,3 +378,30 @@ const numFormatter = (number) => (number < 10 ? "0" + number : number);
   // document
   //   .getElementById("clearBtn")
   //   .addEventListener("click", () => (searchBar.value = ""));
+
+
+
+  //============================================
+
+
+// const hideElements = (elements) => {
+//   elements.forEach((elem) => {
+//     const element = document.getElementById(elem.id);
+//     if (element === null) {
+//       console.warn("could not find element using id: " + elem.id);
+//     } else {
+//       element.classList.add("is-hidden");
+//     }
+//   });
+// }
+
+// const showAllElements = (elements) => {
+//   elements.forEach((elem) => {
+//     const element = document.getElementById(elem.id);
+//     if (element === null) {
+//       console.warn("could not find element using id: " + elem.id);
+//     } else {
+//       element.classList.remove("is-hidden");
+//     }
+//   });
+// }
