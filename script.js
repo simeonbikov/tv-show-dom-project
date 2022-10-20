@@ -21,7 +21,7 @@ const getAllShows = () => {
       }
     })
     .then((data) => {
-      allShows = data;
+      allShows = data.sort((a, b) => a.name.localeCompare(b.name));
       makePageForShows(allShows);
       makeSelectorForShows(allShows);
     })
