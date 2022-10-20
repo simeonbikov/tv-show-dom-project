@@ -1,6 +1,7 @@
 const rootElem = document.getElementById("root");
 const selectShow = document.getElementById("selectShow");
 const selectEpisode = document.getElementById("selectEpisode");
+let searchBar = document.getElementById("searchbar");
 let allShows = [];
 let allEpisodes = [];
 let showId = 0;
@@ -56,7 +57,6 @@ const makePageForShows = (shows) => {
 
     const titleShowBox = document.createElement("div");
     const titleShow = document.createElement("a");
-    // titleShow.href = ""
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
 
@@ -148,6 +148,7 @@ const makeSelectorForShows = (shows) => {
       showId = selectedEl.target.value;
       getAllEpisodes(showId);
     }
+    searchBar.value = "";
   });
 }
 
@@ -164,25 +165,25 @@ const makeSelectorForEpisodes = (episodes) => {
     optionEp.innerText = `S${numFormatter(episode.season)}E${numFormatter(episode.number)} - ${episode.name}`;
     selectEpisode.appendChild(optionEp);
   });
-
-    selectEpisode.addEventListener("change", (selectedEl) => {
-      if (selectedEl === null)
-        console.warn("could not find element using id: " + selectedEl.id);
-      if (selectedEl.target.value === "all") {
-        allEpisodes.forEach((episode) => {
-          const el = document.getElementById(episode.id);
-          el.classList.remove("is-hidden");
-        });
-      }
+  selectEpisode.addEventListener("change", (selectedEl) => {
+    if (selectedEl === null)
+      console.warn("could not find element using id: " + selectedEl.id);
+    if (selectedEl.target.value === "all") {
       allEpisodes.forEach((episode) => {
-        const elem = document.getElementById(episode.id);
-        selectedEl.target.value !== elem.id &&
-        selectedEl.target.value !== "all"
-          ? elem.classList.add("is-hidden")
-          : elem.classList.remove("is-hidden");
+        const el = document.getElementById(episode.id);
+        el.classList.remove("is-hidden");
       });
+    }
+    allEpisodes.forEach((episode) => {
+      const elem = document.getElementById(episode.id);
+      selectedEl.target.value !== elem.id &&
+      selectedEl.target.value !== "all"
+        ? elem.classList.add("is-hidden")
+        : elem.classList.remove("is-hidden");
     });
-  }
+  searchBar.value = "";
+  });
+}
 
 const matchesSearchText = (movie, targetItem) => {
   return (
@@ -192,7 +193,7 @@ const matchesSearchText = (movie, targetItem) => {
 };
 
 let searchItem = () => {
-  let searchBar = document.getElementById("searchbar");
+  // let searchBar = document.getElementById("searchbar");
   if (!searchBar) return;
   searchBar.addEventListener("input", (e) => {
     if (e.target === null) return;
@@ -246,6 +247,7 @@ let searchItem = () => {
         element.classList.add("is-hidden");
       }
     });
+    selectEpisode.value = "all";
   });
 };
 
