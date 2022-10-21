@@ -1,6 +1,7 @@
 const rootElem = document.getElementById("root");
 const selectShow = document.getElementById("selectShow");
 const selectEpisode = document.getElementById("selectEpisode");
+// const displayNumOfEl = document.getElementById("displayNumOfMovies");
 let searchBar = document.getElementById("searchbar");
 let allShows = [];
 let allEpisodes = [];
@@ -49,6 +50,7 @@ const getAllEpisodes = (showId) => {
 
 const makePageForShows = (shows) => {
   selectEpisode.classList.add("is-hidden");
+  // displayNumOfEl.innerText = `Displaying ${allShows.length}/${allEpisodes.length} episodes`;
   rootElem.innerHTML = "";
   shows.forEach((show) => {
     const showBox = document.createElement("div");
@@ -181,6 +183,7 @@ const makeSelectorForEpisodes = (episodes) => {
         ? elem.classList.add("is-hidden")
         : elem.classList.remove("is-hidden");
     });
+  // displayNumOfEl.innerText = `Displaying ${allEpisodes.length}/${allEpisodes.length} episodes`;
   searchBar.value = "";
   });
 }
@@ -247,7 +250,11 @@ let searchItem = () => {
         element.classList.add("is-hidden");
       }
     });
+
     selectEpisode.value = "all";
+
+    // displayNumOfEl.innerText = `Displaying ${allEpisodes.length}/${displayEpisodes.length} episodes`;
+    // displayNumOfEl.innerText = `Displaying ${allShows.length}/${displayShows.length} shows`;
   });
 };
 
