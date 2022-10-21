@@ -58,9 +58,11 @@ const makePageForShows = (shows) => {
     showBox.id = show.id;
 
     const titleShowBox = document.createElement("div");
-    const titleShow = document.createElement("a");
+    const linkShow = document.createElement("a");
+    const titleShow = document.createElement("h3");
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
+    titleShow.id = `title${show.id}`;
 
     const contentShowBox = document.createElement("div");
     contentShowBox.classList.add("content-show-box");
@@ -74,6 +76,7 @@ const makePageForShows = (shows) => {
     const summaryShow = document.createElement("p");
     summaryShow.innerText = show.summary.replace(/(<([^>]+)>)/gi, "");
     summaryShow.classList.add("show-summary");
+    summaryShow.id = `summary${show.id}`;
 
     const infoShowBox = document.createElement("div");
     const infoShowList = document.createElement("ul");
@@ -84,12 +87,14 @@ const makePageForShows = (shows) => {
     const runtimeShow = document.createElement("li");
     ratingShow.innerText = `Rated: ${show.rating.average}`;
     genresShow.innerText = `Genres: ${show.genres}`;
+    genresShow.id = `genres${show.id}`;
     statusShow.innerText = `Status: ${show.status}`;
     runtimeShow.innerText = `Runtime: ${show.runtime}`;
 
     if (rootElem) rootElem.append(showBox);
     showBox.append(titleShowBox, contentShowBox);
-    titleShowBox.append(titleShow);
+    titleShowBox.append(linkShow);
+    linkShow.append(titleShow);
     contentShowBox.append(imgShowBox, summaryShowBox, infoShowBox);
     imgShowBox.append(imgShow);
     summaryShowBox.append(summaryShow);
@@ -107,9 +112,10 @@ const makePageForEpisodes = (episodes) => {
     episodeBox.id = episode.id;
 
     const titleEpisodeBox = document.createElement("div");
-    const nameSeasonEpisode = document.createElement("h3");
-    nameSeasonEpisode.classList.add("episode-title");
-    nameSeasonEpisode.innerText = `${episode.name} - S${numFormatter(episode.season)}E${numFormatter(episode.number)}`;
+    const titleEpisode = document.createElement("h3");
+    titleEpisode.id = `title${episode.id}`;
+    titleEpisode.classList.add("title-episode");
+    titleEpisode.innerText = `${episode.name} - S${numFormatter(episode.season)}E${numFormatter(episode.number)}`;
 
     const imgEpisodeBox = document.createElement("div");
     const imgEpisode = document.createElement("img");
@@ -118,12 +124,13 @@ const makePageForEpisodes = (episodes) => {
 
     const summaryEpisodeBox = document.createElement("div");
     const summaryEpisode = document.createElement("p");
+    summaryEpisode.id = `summary${episode.id}`;
     summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");
     summaryEpisode.classList.add("episode-summary");
 
     if (rootElem) rootElem.append(episodeBox);
     episodeBox.append(titleEpisodeBox, imgEpisodeBox, summaryEpisodeBox);
-    titleEpisodeBox.append(nameSeasonEpisode);
+    titleEpisodeBox.append(titleEpisode);
     imgEpisodeBox.append(imgEpisode);
     summaryEpisodeBox.append(summaryEpisode);
   });
@@ -224,6 +231,7 @@ let searchItem = () => {
         console.warn("could not find element using id: " + elem.id);
       } else {
         element.classList.remove("is-hidden");
+        highlighter(elem.id, searchText);
       }
     });
     hideEpisodes.forEach((elem) => {
@@ -232,6 +240,7 @@ let searchItem = () => {
         console.warn("could not find element using id: " + elem.id);
       } else {
         element.classList.add("is-hidden");
+        // delHighlight(elem.id);
       }
     });
     displayShows.forEach((elem) => {
@@ -240,6 +249,7 @@ let searchItem = () => {
         console.warn("could not find element using id: " + elem.id);
       } else {
         element.classList.remove("is-hidden");
+        highlighter(elem.id, searchText);
       }
     });
     hideShows.forEach((elem) => {
@@ -248,6 +258,7 @@ let searchItem = () => {
         console.warn("could not find element using id: " + elem.id);
       } else {
         element.classList.add("is-hidden");
+        // delHighlight(elem.id);
       }
     });
 
@@ -259,6 +270,35 @@ let searchItem = () => {
 };
 
 const numFormatter = (number) => (number < 10 ? "0" + number : number);
+
+const delHighlight = (el) => el.innerText.textContent;
+
+const highlighter = (id, inputText) => {
+  // const elementBox = document.getElementById(id);
+  const titleEl = document.getElementById(`title${id}`);
+  const summaryEl = document.getElementById(`summary${id}`);
+  const genresEl = document.getElementById(`genres${id}`);
+  // // console.log(element);
+  // titleEl.innerHTML.textContent;
+  // summaryEl.innerHTML.textContent;
+  // genresEl.innerHTML.textContent;
+
+  if (titleEl) addMarkTags(titleEl);
+  if (summaryEl) addMarkTags(summaryEl);
+  if (genresEl) addMarkTags(genresEl);
+
+  // const element = document.getElementById(id);
+  
+  function addMarkTags(el) {
+    el.innerHTML.textContent;
+    if (inputText !== "") {
+      let reg = new RegExp(inputText, "gi");
+      el.innerHTML = el.innerText.replace(reg, function (str) {
+        return `<mark>${str}</mark>`;
+      });
+    }
+  }
+}
 
   //=====================================
 
@@ -288,12 +328,12 @@ const numFormatter = (number) => (number < 10 ? "0" + number : number);
   //     episodeBox.id = episode.id;
 
   //     const titleEpisodeBox = document.createElement("div");
-  //     const nameSeasonEpisode = document.createElement("h3");
-  //     nameSeasonEpisode.classList.add("episode-title");
-  //     nameSeasonEpisode.innerText = `${episode.name} - S${numFormatter(
+  //     const titleEpisode = document.createElement("h3");
+  //     titleEpisode.classList.add("episode-title");
+  //     titleEpisode.innerText = `${episode.name} - S${numFormatter(
   //       episode.season
   //     )}E${numFormatter(episode.number)}`;
-  //     titleEpisodeBox.appendChild(nameSeasonEpisode);
+  //     titleEpisodeBox.appendChild(titleEpisode);
 
   //     const imgEpisodeBox = document.createElement("div");
   //     const imgEpisode = document.createElement("img");
