@@ -1,15 +1,15 @@
 const rootElem = document.getElementById("root");
 const selectShow = document.getElementById("selectShow");
 const selectEpisode = document.getElementById("selectEpisode");
-// const displayNumOfEl = document.getElementById("displayNumOfMovies");
+const displayNum = document.getElementById("displayNumOfMovies");
 let searchBar = document.getElementById("searchbar");
 let allShows = [];
 let allEpisodes = [];
 let showId = 0;
+let foundEl = allShows.length;
 
 const setup = () => {
   getAllShows();
-  searchItem();
 }
 
 window.onload = setup;
@@ -27,6 +27,7 @@ const getAllShows = () => {
       allShows = data.sort((a, b) => a.name.localeCompare(b.name));
       makePageForShows(allShows);
       makeSelectorForShows(allShows);
+      searchItem(allShows);
     })
     .catch((err) => console.log(err.message));
 }
@@ -44,13 +45,15 @@ const getAllEpisodes = (showId) => {
       allEpisodes = data;
       makePageForEpisodes(allEpisodes);
       makeSelectorForEpisodes(allEpisodes);
+      searchItem(allEpisodes);
     })
     .catch((err) => console.log(err.message));
 }
 
 const makePageForShows = (shows) => {
+  rootElem.innerHTML = "";
+  displayNumOfEl(shows.length, shows.length);
   selectEpisode.classList.add("is-hidden");
-  // displayNumOfEl.innerText = `Displaying ${allShows.length}/${allEpisodes.length} episodes`;
   rootElem.innerHTML = "";
   shows.forEach((show) => {
     const showBox = document.createElement("div");
@@ -104,8 +107,9 @@ const makePageForShows = (shows) => {
 }
 
 const makePageForEpisodes = (episodes) => {
-  selectEpisode.classList.remove("is-hidden");
   rootElem.innerHTML = "";
+  displayNumOfEl(episodes.length, episodes.length);
+  selectEpisode.classList.remove("is-hidden");
   episodes.forEach((episode) => {
     const episodeBox = document.createElement("div");
     // episodeBox.classList.add("episode-box");
@@ -190,20 +194,21 @@ const makeSelectorForEpisodes = (episodes) => {
         ? elem.classList.add("is-hidden")
         : elem.classList.remove("is-hidden");
     });
-  // displayNumOfEl.innerText = `Displaying ${allEpisodes.length}/${allEpisodes.length} episodes`;
+
+  displayNumOfEl(episodes.length, 1);
   searchBar.value = "";
   });
 }
 
-const matchesSearchText = (movie, targetItem) => {
+const matchesSearchText = (element, targetItem) => {
   return (
-    movie.name.toLowerCase().includes(targetItem) ||
-    movie.summary.toLowerCase().includes(targetItem)
+    element.name.toLowerCase().includes(targetItem) ||
+    element.summary.toLowerCase().includes(targetItem) //||
+    // show.genres.toLowerCase().includes(targetItem)
   );
 };
 
-let searchItem = () => {
-  // let searchBar = document.getElementById("searchbar");
+let searchItem = (allElements) => {
   if (!searchBar) return;
   searchBar.addEventListener("input", (e) => {
     if (e.target === null) return;
@@ -211,83 +216,50 @@ let searchItem = () => {
 
     let searchText = e.target.value;
 
-    let displayEpisodes = allEpisodes.filter((episode) => {
-      return matchesSearchText(episode, searchText.toLowerCase());
+    let displayElements = allElements.filter((elem) => {
+      return matchesSearchText(elem, searchText.toLowerCase());
     });
-    let hideEpisodes = allEpisodes.filter((episode) => {
-      return !matchesSearchText(episode, searchText.toLowerCase());
-    });
-
-    let displayShows = allShows.filter((show) => {
-      return matchesSearchText(show, searchText.toLowerCase());
-    });
-    let hideShows = allShows.filter((show) => {
-      return !matchesSearchText(show, searchText.toLowerCase());
+    let hideElements = allElements.filter((elem) => {
+      return !matchesSearchText(elem, searchText.toLowerCase());
     });
 
-    displayEpisodes.forEach((elem) => {
-      const element = document.getElementById(elem.id);
+    displayElements.map(makeElemId).forEach((elemId) => {
+      const element = document.getElementById(elemId);
       if (element === null) {
-        console.warn("could not find element using id: " + elem.id);
+        console.warn("could not find element using id: " + elemId);
       } else {
         element.classList.remove("is-hidden");
-        highlighter(elem.id, searchText);
+        highlighter(elemId, searchText);
       }
     });
-    hideEpisodes.forEach((elem) => {
-      const element = document.getElementById(elem.id);
+    hideElements.map(makeElemId).forEach((elemId) => {
+      const element = document.getElementById(elemId);
       if (element === null) {
-        console.warn("could not find element using id: " + elem.id);
+        console.warn("could not find element using id: " + elemId);
       } else {
         element.classList.add("is-hidden");
-        // delHighlight(elem.id);
       }
     });
-    displayShows.forEach((elem) => {
-      const element = document.getElementById(elem.id);
-      if (element === null) {
-        console.warn("could not find element using id: " + elem.id);
-      } else {
-        element.classList.remove("is-hidden");
-        highlighter(elem.id, searchText);
-      }
-    });
-    hideShows.forEach((elem) => {
-      const element = document.getElementById(elem.id);
-      if (element === null) {
-        console.warn("could not find element using id: " + elem.id);
-      } else {
-        element.classList.add("is-hidden");
-        // delHighlight(elem.id);
-      }
-    });
-
     selectEpisode.value = "all";
-
-    // displayNumOfEl.innerText = `Displaying ${allEpisodes.length}/${displayEpisodes.length} episodes`;
-    // displayNumOfEl.innerText = `Displaying ${allShows.length}/${displayShows.length} shows`;
+    displayNumOfEl(allElements.length, displayElements.length);
   });
 };
 
-const numFormatter = (number) => (number < 10 ? "0" + number : number);
+const displayNumOfEl = (allEl, foundEl) =>
+  displayNum.innerText = `Displaying ${allEl}/${foundEl} movies`;
 
-const delHighlight = (el) => el.innerText.textContent;
+const makeElemId = (element) => element.id;
+
+const numFormatter = (number) => (number < 10 ? "0" + number : number);
 
 const highlighter = (id, inputText) => {
   // const elementBox = document.getElementById(id);
   const titleEl = document.getElementById(`title${id}`);
   const summaryEl = document.getElementById(`summary${id}`);
-  const genresEl = document.getElementById(`genres${id}`);
-  // // console.log(element);
-  // titleEl.innerHTML.textContent;
-  // summaryEl.innerHTML.textContent;
-  // genresEl.innerHTML.textContent;
-
+  // const genresEl = document.getElementById(`genres${id}`);
   if (titleEl) addMarkTags(titleEl);
   if (summaryEl) addMarkTags(summaryEl);
-  if (genresEl) addMarkTags(genresEl);
-
-  // const element = document.getElementById(id);
+  // if (genresEl) addMarkTags(genresEl);
   
   function addMarkTags(el) {
     el.innerHTML.textContent;
