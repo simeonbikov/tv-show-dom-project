@@ -4,28 +4,123 @@
   box-sizing: border-box;
 }
 
-.container {
-  /* display: flex;
-  justify-content: center; */
-}
-
-.content {
-  color: #000;
-  /* width: 90%; */
-  /* display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+.navigation {
+  display: flex;
   justify-content: center;
-  align-content: center; */
 }
 
-/* .episode-box { */
+.nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  overflow: hidden;
+  position: fixed;
+  background-color: aquamarine;
+  top: 0;
+  margin-bottom: 60px;
+}
+
+.input {
+  width: 500px;
+}
+
+.form-selectbar {
+
+}
+
+.display-num-of-movies {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.root-content {
+  color: #000;
+}
+
+/* ---------- show cards: ---------- */
+
+.show-wrapper {
+  background-color: blanchedalmond;
+  width: 500px;
+  margin: 25px;
+  padding: 25px;
+
+  height: 100%;
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 
+    "ttl ttl"
+    "img inf"
+    "sum sum";
+}
+
+.title-show-box {
+  grid-area: ttl;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.img-show-box {
+  grid-area: img;
+}
+
+.summary-show-box {
+  grid-area: sum;
+  margin-top: 15px;
+  text-align: justify;
+  display: flex;
+}
+
+.info-show-box {
+  grid-area: inf;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.title-show {
+
+}
+
+/* .content-show-box {
+  display: flex;
+  flex-direction: column;
+} */
+
+.summary-show {
+
+}
+
+.info-show-list {
+  list-style-type: none;
+}
+
+/* ---------- episodes cards: ---------- */
+
+.episode-wrapper {
   /* width: 250px; */
   /* margin: 20px; */
   /* display: flex;
   flex-direction: column;
   align-content: center; */
-/* } */
+}
+
+.title-episode {
+
+}
+
+.summary-episode {
+  
+}
+
+/* ---------- other: ---------- */
+
 
 .is-hidden {
   display: none;
@@ -35,12 +130,4 @@
   background-color: yellow;
 }
 
-/* .show-box {
-  display: flex;
-  flex-direction: column;
-} */
 
-.content-show-box {
-  display: flex;
-  flex-direction: row;
-}

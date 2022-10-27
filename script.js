@@ -17,7 +17,7 @@ window.onload = setup;
 const getAllShows = () => {
   fetch("https://api.tvmaze.com/shows")
     .then((response) => {
-      if (response.status >= 200 && response.status <= 299) {
+      if (response.ok) {
         return response.json();
       } else {
         throw new Error(`Encountered something unexpected: ${response.status} ${response.statusText}`);
@@ -35,7 +35,7 @@ const getAllShows = () => {
 const getAllEpisodes = (showId) => {
   fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
     .then((response) => {
-      if (response.status >= 200 && response.status <= 299) {
+      if (response.ok) {
         return response.json();
       } else {
         throw new Error(`Encountered something unexpected: ${response.status} ${response.statusText}`);
@@ -60,28 +60,34 @@ const makePageForShows = (shows) => {
     // showBox.classList.add("show-box");
     showBox.id = show.id;
 
+    const showWrapper = document.createElement("div");
+    showWrapper.classList.add("show-wrapper");
+
     const titleShowBox = document.createElement("div");
-    const linkShow = document.createElement("a");
+    titleShowBox.classList.add("title-show-box");
     const titleShow = document.createElement("h3");
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
     titleShow.id = `title${show.id}`;
 
-    const contentShowBox = document.createElement("div");
-    contentShowBox.classList.add("content-show-box");
+    // const contentShowBox = document.createElement("div");
+    // contentShowBox.classList.add("content-show-box");
 
     const imgShowBox = document.createElement("div");
+    imgShowBox.classList.add("img-show-box");
     const imgShow = document.createElement("img");
     imgShow.src = show.image.medium;
     imgShow.alt = `image of show - ${show.name}`;
 
     const summaryShowBox = document.createElement("div");
+    summaryShowBox.classList.add("summary-show-box");
     const summaryShow = document.createElement("p");
     summaryShow.innerText = show.summary.replace(/(<([^>]+)>)/gi, "");
-    summaryShow.classList.add("show-summary");
+    summaryShow.classList.add("summary-show");
     summaryShow.id = `summary${show.id}`;
 
     const infoShowBox = document.createElement("div");
+    infoShowBox.classList.add("info-show-box");
     const infoShowList = document.createElement("ul");
     infoShowList.classList.add("info-show-list");
     const ratingShow = document.createElement("li");
@@ -95,10 +101,12 @@ const makePageForShows = (shows) => {
     runtimeShow.innerText = `Runtime: ${show.runtime}`;
 
     if (rootElem) rootElem.append(showBox);
-    showBox.append(titleShowBox, contentShowBox);
-    titleShowBox.append(linkShow);
-    linkShow.append(titleShow);
-    contentShowBox.append(imgShowBox, summaryShowBox, infoShowBox);
+    showBox.append(showWrapper);
+    // showWrapper.append(titleShowBox, contentShowBox);
+    showWrapper.append(titleShowBox, imgShowBox, summaryShowBox, infoShowBox);
+    // titleShowBox.append(titleShow);
+    // contentShowBox.append(imgShowBox, summaryShowBox, infoShowBox);
+    titleShowBox.append(titleShow);
     imgShowBox.append(imgShow);
     summaryShowBox.append(summaryShow);
     infoShowBox.append(infoShowList);
@@ -110,10 +118,14 @@ const makePageForEpisodes = (episodes) => {
   rootElem.innerHTML = "";
   displayNumOfEl(episodes.length, episodes.length);
   selectEpisode.classList.remove("is-hidden");
+
   episodes.forEach((episode) => {
     const episodeBox = document.createElement("div");
     // episodeBox.classList.add("episode-box");
     episodeBox.id = episode.id;
+
+    const episodeWrapper = document.createElement("div");
+    episodeWrapper.classList.add("episode-wrapper");
 
     const titleEpisodeBox = document.createElement("div");
     const titleEpisode = document.createElement("h3");
@@ -133,7 +145,8 @@ const makePageForEpisodes = (episodes) => {
     summaryEpisode.classList.add("episode-summary");
 
     if (rootElem) rootElem.append(episodeBox);
-    episodeBox.append(titleEpisodeBox, imgEpisodeBox, summaryEpisodeBox);
+    episodeBox.append(episodeWrapper);
+    episodeWrapper.append(titleEpisodeBox, imgEpisodeBox, summaryEpisodeBox);
     titleEpisodeBox.append(titleEpisode);
     imgEpisodeBox.append(imgEpisode);
     summaryEpisodeBox.append(summaryEpisode);

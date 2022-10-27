@@ -5,31 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TV Show Project | Simeon Bikov (simeonbikov)</title>
     <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="width-style.css" rel="stylesheet" />
+    <!-- <link rel="icon" href="/favicon.ico" type="image/x-icon" /> -->
   </head>
 
   <body>
   <nav class="navigation">
-    <select name="select-show" id="selectShow">
-      <!-- <option value="all">All shows</option> -->
-    </select>
+    <div class="nav-wrapper">
+      <select name="select-show" id="selectShow">
+      </select>
 
-    <select name="select-episode" id="selectEpisode">
-      <!-- <option value="all">All episodes</option> -->
-    </select>
+      <select name="select-episode" id="selectEpisode">
+      </select>
 
-    <form class="form-selectbar">
-      <input id="searchbar" type="text" class="input" placeholder="search..."/>
-      <!-- <button id="clearBtn" class="clear-btn">clear</button> -->
-    </form>
+      <form class="form-selectbar">
+        <input id="searchbar" type="text" class="input" placeholder="search..."/>
+        <!-- <button id="clearBtn" class="clear-btn">clear</button> -->
+      </form>
 
-    <div>
-      <p id="displayNumOfMovies"></p>
+      <div class="display-num-of-movies">
+        <p id="displayNumOfMovies"></p>
+      </div>
     </div>
   </nav>
   
   <main class="container">
-    <div id="root" class="content">
+    <div id="root" class="root-content">
     </div>
   </main>
   
