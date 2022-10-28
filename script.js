@@ -95,7 +95,7 @@ const makePageForShows = (shows) => {
     const statusShow = document.createElement("li");
     const runtimeShow = document.createElement("li");
     ratingShow.innerText = `Rated: ${show.rating.average}`;
-    genresShow.innerText = `Genres: ${show.genres}`;
+    genresShow.innerText = `Genres: ${show.genres.join(" | ")}`;
     genresShow.id = `genres${show.id}`;
     statusShow.innerText = `Status: ${show.status}`;
     runtimeShow.innerText = `Runtime: ${show.runtime}`;
@@ -128,17 +128,20 @@ const makePageForEpisodes = (episodes) => {
     episodeWrapper.classList.add("episode-wrapper");
 
     const titleEpisodeBox = document.createElement("div");
+    titleEpisodeBox.classList.add("title-episode-box");
     const titleEpisode = document.createElement("h3");
     titleEpisode.id = `title${episode.id}`;
     titleEpisode.classList.add("title-episode");
     titleEpisode.innerText = `${episode.name} - S${numFormatter(episode.season)}E${numFormatter(episode.number)}`;
 
     const imgEpisodeBox = document.createElement("div");
+    imgEpisodeBox.classList.add("img-episode-box");
     const imgEpisode = document.createElement("img");
     imgEpisode.src = episode.image.medium;
     imgEpisode.alt = `image of episode - ${episode.name}`;
 
     const summaryEpisodeBox = document.createElement("div");
+    summaryEpisodeBox.classList.add("summary-episode-box");
     const summaryEpisode = document.createElement("p");
     summaryEpisode.id = `summary${episode.id}`;
     summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");

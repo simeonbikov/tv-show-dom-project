@@ -17,7 +17,7 @@
   position: fixed;
   background-color: aquamarine;
   top: 0;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
 }
 
 .input {
@@ -33,25 +33,29 @@
 }
 
 .container {
-  display: flex;
-  justify-content: center;
+  /* display: flex;
+  justify-content: center; */
 }
 
 .root-content {
   color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
+  gap: 25px;
+  justify-content: center;
 }
 
 /* ---------- show cards: ---------- */
 
 .show-wrapper {
   background-color: blanchedalmond;
-  width: 500px;
-  margin: 25px;
+  width: 80vw;
   padding: 25px;
 
   height: 100%;
   display: grid;
-  grid-gap: 3px;
+  grid-gap: 25px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto auto;
   grid-template-areas: 
@@ -62,7 +66,6 @@
 
 .title-show-box {
   grid-area: ttl;
-  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -72,7 +75,6 @@
 
 .summary-show-box {
   grid-area: sum;
-  margin-top: 15px;
   text-align: justify;
   display: flex;
 }
@@ -81,7 +83,6 @@
   grid-area: inf;
   display: flex;
   align-items: center;
-  padding-left: 10px;
 }
 
 .title-show {
@@ -104,19 +105,30 @@
 /* ---------- episodes cards: ---------- */
 
 .episode-wrapper {
-  /* width: 250px; */
-  /* margin: 20px; */
-  /* display: flex;
+  background-color: bisque;
+  width: 250px;
+  display: flex;
   flex-direction: column;
-  align-content: center; */
+}
+
+.title-episode-box {
+  text-align: center;
 }
 
 .title-episode {
 
 }
 
+.img-episode-box {
+
+}
+
+.summary-episode-box {
+  text-align: justify;
+}
+
 .summary-episode {
-  
+
 }
 
 /* ---------- other: ---------- */

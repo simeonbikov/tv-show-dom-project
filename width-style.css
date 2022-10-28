@@ -1,5 +1,52 @@
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1000px) {
   body {
     background-color: lightblue;
   }
+
+  .show-wrapper {
+    grid-template-columns: 210px auto 150px;
+    grid-template-rows: 40px auto;
+    grid-template-areas: 
+      "img ttl inf"
+      "img sum inf";
+  }
+
+/* .title-show-box {
+  grid-area: ttl;
+  margin-bottom: 20px;
+  text-align: center;
+} */
+
+/* .img-show-box {
+  grid-area: img;
+} */
+
+/* .summary-show-box { */
+  /* margin-top: 0; */
+  /* grid-area: sum;
+  text-align: justify;
+  display: flex; */
+/* } */
+
+/* .info-show-box {
+  grid-area: inf;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+} */
+
+/* .title-show {
+
+} */
+
+/* .content-show-box {
+  display: flex;
+  flex-direction: column;
+} */
+
+/* .summary-show {
+  width: 100%;
+} */
+
+
 }
