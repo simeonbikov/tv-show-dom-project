@@ -63,9 +63,13 @@ const makePageForShows = (shows) => {
     const showWrapper = document.createElement("div");
     showWrapper.classList.add("show-wrapper");
 
+    // showWrapper.style.backgroundImage = `linear-gradient(to right bottom, hsla(111, 55%, 64%, 0.8), hsla(160, 64%, 43%, 0.8)), url(${show.image.original})`;
+
+    showWrapper.style.backgroundImage = `linear-gradient(to right bottom, hsla(0, 0%, 0%, 0.8), hsla(46, 100%, 50%, 0.8)), url(${show.image.original})`;
+
     const titleShowBox = document.createElement("div");
     titleShowBox.classList.add("title-show-box");
-    const titleShow = document.createElement("h3");
+    const titleShow = document.createElement("h2");
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
     titleShow.id = `title${show.id}`;

@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #f7fff7;
+}
+
 .navigation {
   display: flex;
   justify-content: center;
@@ -15,7 +19,7 @@
   width: 500px;
   overflow: hidden;
   position: fixed;
-  background-color: aquamarine;
+  background-color: hsl(46, 100%, 50%);
   top: 0;
   /* margin-bottom: 60px; */
 }
@@ -38,7 +42,7 @@
 }
 
 .root-content {
-  color: #000;
+  color: #fdfffc;
   display: flex;
   flex-wrap: wrap;
   /* justify-content: space-evenly; */
@@ -49,7 +53,16 @@
 /* ---------- show cards: ---------- */
 
 .show-wrapper {
-  background-color: blanchedalmond;
+  /* background: rgb(2,2,5); */
+  /* background: linear-gradient(180deg, rgba(2,2,5,0.5) 22%, rgba(110,109,6,0.5) 56%, rgba(255,237,0,0.5) 100%); */
+  /* background-position: right 0 center; */
+  /* background: linear-gradient(to right bottom, hsla(111, 55%, 64%, 0.8), hsla(160, 64%, 43%, 0.8)) */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 80vw auto;
+  /* box-shadow: 20px 20px 500px grey; */
+
   width: 80vw;
   padding: 25px;
 
