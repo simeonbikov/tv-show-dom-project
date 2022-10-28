@@ -7,6 +7,7 @@ let allShows = [];
 let allEpisodes = [];
 let showId = 0;
 let foundEl = allShows.length;
+let imgEpisodeBackground;
 
 const setup = () => {
   getAllShows();
@@ -62,8 +63,6 @@ const makePageForShows = (shows) => {
 
     const showWrapper = document.createElement("div");
     showWrapper.classList.add("show-wrapper");
-
-    // showWrapper.style.backgroundImage = `linear-gradient(to right bottom, hsla(111, 55%, 64%, 0.8), hsla(160, 64%, 43%, 0.8)), url(${show.image.original})`;
 
     showWrapper.style.backgroundImage = `linear-gradient(to right bottom, hsla(0, 0%, 0%, 0.8), hsla(46, 100%, 50%, 0.8)), url(${show.image.original})`;
 
@@ -146,6 +145,7 @@ const makePageForEpisodes = (episodes) => {
 
     const summaryEpisodeBox = document.createElement("div");
     summaryEpisodeBox.classList.add("summary-episode-box");
+    // summaryEpisodeBox.style.backgroundImage = `linear-gradient(to right bottom, hsla(0, 0%, 0%, 0.8), hsla(46, 100%, 50%, 0.8)), url(${episode.image.medium})`;
     const summaryEpisode = document.createElement("p");
     summaryEpisode.id = `summary${episode.id}`;
     summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");
