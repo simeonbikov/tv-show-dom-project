@@ -7,8 +7,6 @@
 body {
   color: var(--main-white);
   background-color: var(--main-white);
-  /* font-family: 'Noto Serif', serif; */
-  /* font-family: 'Oxygen', sans-serif; */
   font-family: 'Lora', serif;
 }
 
@@ -23,45 +21,27 @@ body {
 
 .home-btn:hover {
   background-color: var(--main-yellow);
-  /* background-color: #fcbf49 */
-  /* background-color: #fdc500; */
 }
-
-/* .header {
-  display: flex;
-  justify-content: center;
-} */
 
 .navigation {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 0.3em;
-  /* flex-wrap:wrap; */
   overflow: hidden;
   position: fixed;
   z-index: 1;
-  /* background-color: hsl(46, 100%, 50%); */
   background-color: var(--main-black);
   top: 0;
-  /* padding: 0, 10px; */
   width: 100vw;
-  /* box-shadow: 2px 4px 5px rgb(255, 255, 255); */
-  /* margin-bottom: 60px; */
 }
 
 .fields-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: start;
   gap: 0.3em;
   flex-wrap: wrap;
 }
-
-/* .fields-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-} */
 
 .input-wrapper,
 .select-wrapper {
@@ -84,14 +64,12 @@ body {
 }
 
 .display-num-of-movies {
-  /* color: #8e9aaf; */
   height: 100%;
   min-width: 13.5em;
-  margin: auto 0;
   color: var(--light-grey);
   text-align: right;
   font-size: 13px;
-  padding-right: 10px;
+  padding: 10px 10px 0 0;
 }
 
 .container {
@@ -99,8 +77,6 @@ body {
 }
 
 .root-content {
-  /* color: #fdfffc; */
-  /* text-shadow: 1px 1px 1px #000; */
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
@@ -149,18 +125,33 @@ body {
   grid-area: inf;
   display: flex;
   align-items: center;
-}
-
-.title-show {
-
+  font-weight: 500;
 }
 
 .summary-show {
+  font-weight: 400;
+  letter-spacing: 0.5px;
 
 }
 
 .info-show-list {
   list-style-type: none;
+}
+
+.title-show {
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.title-show,
+.title-episode {
+  cursor: pointer;
+}
+
+.title-show:hover,
+.title-episode:hover {
+  color: var(--yellow);
 }
 
 /* ---------- episodes cards: ---------- */
@@ -179,24 +170,21 @@ body {
   text-align: center;
 }
 
-.title-episode {
-
-}
-
 .img-episode-box {
   height: 140px;
 }
 
 .summary-episode-box {
   height: 100%;
-  background-image: linear-gradient(to right bottom, hsla(197, 94%, 6%, 0.8), hsla(46, 100%, 50%, 0.8)), url("img/img-bg.png");
+  background-image: var(--gradient);
   background-size: 100%;
-  padding: 15px;
-  text-align: justify;
+  padding: 16px;
+  text-align: center;
+  font-size: 16px;
 }
 
 .summary-episode {
-
+  
 }
 
 footer {
@@ -212,8 +200,9 @@ footer a:active {
 }
 
 footer a:hover {
-  color: var(--main-yellow);
+  color: var(--yellow);
 }
+
 
 /* ---------- other: ---------- */
 
