@@ -36,9 +36,10 @@ body {
   width: 100vw;
 }
 
-.fields-wrapper {
+.select-box,
+.input-box {
   display: flex;
-  justify-content: start;
+  justify-content: flex-end;
   /* gap: 0.3em; */
   row-gap: 0.3em;
   flex-wrap: wrap;
@@ -46,7 +47,8 @@ body {
 
 .input-wrapper,
 .select-wrapper {
-  height: 1.3em;
+  height: 2.3em;
+  margin: 0 0.15em;
 }
 
 .selector,
@@ -66,7 +68,8 @@ body {
 
 .display-num-of-movies {
   height: 100%;
-  min-width: 13.5em;
+  /* min-width: 15em; */
+  width: 18em;
   color: var(--light-grey);
   text-align: right;
   font-size: 13px;

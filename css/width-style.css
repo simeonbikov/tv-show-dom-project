@@ -7,26 +7,25 @@
       "img ttl inf"
       "img sum inf";
   }
-
 }
 
-@media only screen and (min-width: 698px) {
+@media only screen and (min-width: 703px) {
 
   /* .container {
     margin-top: 90px;
   } */
 
-  .input-wrapper,
+  /* .input-wrapper,
   .select-wrapper {
     height: 2.3em;
-  }
+  } */
 
-  .fields-wrapper {
+  /* .fields-wrapper {
   display: flex;
   justify-content: end;
   column-gap: 0.3em;
   row-gap: 0.3em;
   flex-wrap: wrap;
-}
+} */
 
 }
