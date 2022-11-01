@@ -7,7 +7,6 @@ let allShows = [];
 let allEpisodes = [];
 let showId = 0;
 let foundEl = allShows.length;
-let imgEpisodeBackground;
 
 const setup = () => {
   getAllShows();
@@ -59,7 +58,7 @@ const makePageForShows = (shows) => {
   shows.forEach((show) => {
     const showBox = document.createElement("div");
     // showBox.classList.add("show-box");
-    showBox.id = show.id;
+    // showBox.id = show.id;
 
     const showWrapper = document.createElement("div");
     showWrapper.classList.add("show-wrapper");
@@ -72,9 +71,6 @@ const makePageForShows = (shows) => {
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
     titleShow.id = `title${show.id}`;
-
-    // const contentShowBox = document.createElement("div");
-    // contentShowBox.classList.add("content-show-box");
 
     const imgShowBox = document.createElement("div");
     imgShowBox.classList.add("img-show-box");
@@ -105,15 +101,18 @@ const makePageForShows = (shows) => {
 
     if (rootElem) rootElem.append(showBox);
     showBox.append(showWrapper);
-    // showWrapper.append(titleShowBox, contentShowBox);
     showWrapper.append(titleShowBox, imgShowBox, summaryShowBox, infoShowBox);
-    // titleShowBox.append(titleShow);
-    // contentShowBox.append(imgShowBox, summaryShowBox, infoShowBox);
     titleShowBox.append(titleShow);
     imgShowBox.append(imgShow);
     summaryShowBox.append(summaryShow);
     infoShowBox.append(infoShowList);
     infoShowList.append(ratingShow, genresShow, statusShow, runtimeShow);
+
+    titleShow.addEventListener("click", () => {
+      const showId = getIdFromString(titleShow.id);
+      getAllEpisodes(showId);
+    });
+
   });
 }
 
@@ -145,7 +144,6 @@ const makePageForEpisodes = (episodes) => {
 
     const summaryEpisodeBox = document.createElement("div");
     summaryEpisodeBox.classList.add("summary-episode-box");
-    // summaryEpisodeBox.style.backgroundImage = `linear-gradient(to right bottom, hsla(0, 0%, 0%, 0.8), hsla(46, 100%, 50%, 0.8)), url(${episode.image.medium})`;
     const summaryEpisode = document.createElement("p");
     summaryEpisode.id = `summary${episode.id}`;
     summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");
@@ -157,6 +155,17 @@ const makePageForEpisodes = (episodes) => {
     titleEpisodeBox.append(titleEpisode);
     imgEpisodeBox.append(imgEpisode);
     summaryEpisodeBox.append(summaryEpisode);
+
+    titleEpisode.addEventListener("click", () => {
+      const episodeId = getIdFromString(titleEpisode.id);
+      allEpisodes.map(makeElemId).forEach((elemId) => {
+        const elem = document.getElementById(elemId);
+        elem.id !== episodeId
+          ? elem.classList.add("is-hidden")
+          : elem.classList.remove("is-hidden");
+      });
+    });
+
   });
 }
 
@@ -272,6 +281,8 @@ const makeElemId = (element) => element.id;
 
 const numFormatter = (number) => (number < 10 ? "0" + number : number);
 
+const getIdFromString = (str) => str.match(/(\d+)/)[0];
+
 const highlighter = (id, inputText) => {
   // const elementBox = document.getElementById(id);
   const titleEl = document.getElementById(`title${id}`);
@@ -292,7 +303,12 @@ const highlighter = (id, inputText) => {
   }
 }
 
-document.getElementById("homeBtn").addEventListener("click", () => getAllShows());
+document.getElementById("homeBtn").addEventListener("click", (e) => {
+  searchBar.value = "";
+  selectShow.value = "all";
+  // selectEpisode.value = "all";
+  getAllShows();
+});
 
   //=====================================
 
