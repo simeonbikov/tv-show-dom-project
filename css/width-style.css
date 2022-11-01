@@ -21,4 +21,12 @@
     height: 2.3em;
   }
 
+  .fields-wrapper {
+  display: flex;
+  justify-content: end;
+  column-gap: 0.3em;
+  row-gap: 0.3em;
+  flex-wrap: wrap;
+}
+
 }
