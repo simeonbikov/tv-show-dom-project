@@ -292,6 +292,8 @@ const highlighter = (id, inputText) => {
   }
 }
 
+document.getElementById("homeBtn").addEventListener("click", () => getAllShows());
+
   //=====================================
 
 
