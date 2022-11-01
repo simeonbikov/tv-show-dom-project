@@ -1,31 +1,45 @@
 @media only screen and (min-width: 1000px) {
 
   .show-wrapper {
-    grid-template-columns: 210px auto 150px;
-    grid-template-rows: 40px auto;
+    grid-template-columns: 13.1em auto 9.4em;
+    grid-template-rows: 2.5em auto;
     grid-template-areas:
       "img ttl inf"
       "img sum inf";
   }
+
+  .container {
+    margin-top: 4em;
+  }
+
 }
 
-@media only screen and (min-width: 703px) {
+@media only screen and (min-width: 660px) {
 
   /* .container {
-    margin-top: 90px;
+    margin-top: 6em;
   } */
 
-  /* .input-wrapper,
+  .input-wrapper,
   .select-wrapper {
     height: 2.3em;
-  } */
+  }
+
+  .selector,
+  .input, textarea {
+    width: 18em;
+  }
+
+  .display-num-of-movies {
+    /* min-width: 10.5em; */
+    padding: 10px 10px 0 0;
+  }
 
   /* .fields-wrapper {
   display: flex;
   justify-content: end;
-  column-gap: 0.3em;
-  row-gap: 0.3em;
-  flex-wrap: wrap;
-} */
+  /* column-gap: 0.3em; */
+  /* flex-wrap: wrap; */
+/* } */
 
 }

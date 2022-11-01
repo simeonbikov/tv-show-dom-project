@@ -266,7 +266,7 @@ let searchItem = (allElements) => {
 };
 
 const displayNumOfEl = (allEl, foundEl) =>
-  displayNum.innerText = `Displaying ${allEl}/${foundEl} movies`;
+  displayNum.innerText = `Displaying ${allEl} of ${foundEl}`;
 
 const makeElemId = (element) => element.id;
 

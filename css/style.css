@@ -14,8 +14,8 @@ body {
   background-color: var(--main-black);
   border: none;
   color: var(--main-white);
-  padding: 7px 10px;
-  font-size: 21px;
+  padding: 7px 10px 6px;
+  font-size: 1.3em;
   cursor: pointer;
 }
 
@@ -27,7 +27,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 0.3em;
+  /* gap: 0.3em; */
   overflow: hidden;
   position: fixed;
   z-index: 1;
@@ -36,10 +36,9 @@ body {
   width: 100vw;
 }
 
-.select-box,
-.input-box {
+.fields-wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   /* gap: 0.3em; */
   row-gap: 0.3em;
   flex-wrap: wrap;
@@ -47,8 +46,8 @@ body {
 
 .input-wrapper,
 .select-wrapper {
-  height: 2.3em;
-  margin: 0 0.15em;
+  height: 1.3em;
+  padding: 0 0.15em;
 }
 
 .selector,
@@ -56,7 +55,7 @@ body {
   outline: 0;
   border: 0;
   box-shadow: none;
-  width: 18em;
+  width: 13em;
   height: 100%;
   color: var(--main-white);
   background-color: var(--dark-grey);
@@ -68,22 +67,21 @@ body {
 
 .display-num-of-movies {
   height: 100%;
-  /* min-width: 15em; */
-  width: 18em;
+  min-width: 10.5em;
   color: var(--light-grey);
   text-align: right;
   font-size: 13px;
-  padding: 10px 10px 0 0;
+  padding: 0 3px;
 }
 
 .container {
-  margin-top: 85px;
+  margin-top: 5.5em;
 }
 
 .root-content {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: var(--cards-border);
   justify-content: center;
 }
 
@@ -97,11 +95,11 @@ body {
   box-shadow: 2px 4px 5px var(--light-grey);
 
   width: 80vw;
-  padding: 25px;
+  padding: var(--cards-border);
 
   height: 100%;
   display: grid;
-  grid-gap: 25px;
+  grid-gap: var(--cards-border);
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto auto;
   grid-template-areas: 
@@ -144,7 +142,7 @@ body {
 
 .title-show {
   cursor: pointer;
-  font-size: 32px;
+  font-size: 2em;
   font-weight: 700;
 }
 
@@ -162,7 +160,7 @@ body {
 
 .episode-wrapper {
   background-color: var(--main-black);
-  width: 250px;
+  width: 15.6em;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -182,9 +180,9 @@ body {
   height: 100%;
   background-image: var(--gradient);
   background-size: 100%;
-  padding: 16px;
+  padding: 1em;
   text-align: center;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 .summary-episode {
@@ -194,7 +192,7 @@ body {
 footer {
   color: var(--main-black);
   text-align: center;
-  margin: 25px;
+  margin: var(--cards-border);
 }
 
 footer a:link,
