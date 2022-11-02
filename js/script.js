@@ -10,7 +10,6 @@ let foundEl = allShows.length;
 
 const setup = () => {
   getAllShows();
-  // searchItem();
 }
 
 window.onload = setup;
@@ -239,6 +238,7 @@ const matchesSearchText = (element, targetItem) => {
 };
 
 let searchItem = (allElements) => {
+  console.log(allElements.length);
   if (!searchBar) return;
   searchBar.addEventListener("input", (e) => {
     if (e.target === null) return;
@@ -258,16 +258,16 @@ let searchItem = (allElements) => {
         element.classList.remove("is-hidden");
         highlighter(elemId, searchText);
         // setTimeout(highlighter(elemId, searchText), 10000);
-      } else { 
-        return;
+      // } else { 
+      //   return;
       }
     });
     hideElements.map(makeElemId).forEach((elemId) => {
       const element = document.getElementById(elemId);
       if (element !== null) {
         element.classList.add("is-hidden");
-      } else {
-        return;
+      // } else {
+      //   return;
       }
     });
     selectEpisode.value = "all";
@@ -288,11 +288,9 @@ const highlighter = (id, inputText) => {
   const titleEl = document.getElementById(`title${id}`);
   const summaryEl = document.getElementById(`summary${id}`);
   // const genresEl = document.getElementById(`genres${id}`);
-  if (titleEl) addMarkTags(titleEl);
-  if (summaryEl) addMarkTags(summaryEl);
   // if (genresEl) addMarkTags(genresEl);
   
-  function addMarkTags(el) {
+  const addMarkTags = (el) => {
     el.innerHTML.textContent;
     if (inputText !== null) {
       let reg = new RegExp(inputText, "gi");
@@ -301,6 +299,8 @@ const highlighter = (id, inputText) => {
       });
     }
   }
+  if (titleEl) addMarkTags(titleEl);
+  if (summaryEl) addMarkTags(summaryEl);
 }
 
 document.getElementById("homeBtn").addEventListener("click", (e) => {
