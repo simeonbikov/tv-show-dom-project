@@ -112,6 +112,7 @@ const makePageForShows = (shows) => {
     titleShow.addEventListener("click", () => {
       const showId = getIdFromString(titleShow.id);
       selectShow.value = showId;
+      searchBar.value = "";
       getAllEpisodes(showId);
     });
   });
@@ -158,6 +159,7 @@ const makePageForEpisodes = (episodes) => {
     summaryEpisodeBox.append(summaryEpisode);
 
     titleEpisode.addEventListener("click", () => {
+      searchBar.value = "";
       const episodeId = getIdFromString(titleEpisode.id);
       allEpisodes.map(makeElemId).forEach((elemId) => {
         const elem = document.getElementById(elemId);
@@ -252,20 +254,20 @@ let searchItem = (allElements) => {
 
     displayElements.map(makeElemId).forEach((elemId) => {
       const element = document.getElementById(elemId);
-      if (element === null) {
-        console.warn("could not find element using id: " + elemId);
-      } else {
+      if (element !== null) {
         element.classList.remove("is-hidden");
         highlighter(elemId, searchText);
         // setTimeout(highlighter(elemId, searchText), 10000);
+      } else { 
+        return;
       }
     });
     hideElements.map(makeElemId).forEach((elemId) => {
       const element = document.getElementById(elemId);
-      if (element === null) {
-        console.warn("could not find element using id: " + elemId);
-      } else {
+      if (element !== null) {
         element.classList.add("is-hidden");
+      } else {
+        return;
       }
     });
     selectEpisode.value = "all";
@@ -274,7 +276,7 @@ let searchItem = (allElements) => {
 };
 
 const displayNumOfEl = (allEl, foundEl) =>
-  displayNum.innerText = `Displaying ${allEl} of ${foundEl}`;
+  (displayNum.innerText = `Displaying ${foundEl} of ${allEl}`);
 
 const makeElemId = (element) => element.id;
 
@@ -285,7 +287,7 @@ const getIdFromString = (str) => str.match(/(\d+)/)[0];
 const highlighter = (id, inputText) => {  
   const titleEl = document.getElementById(`title${id}`);
   const summaryEl = document.getElementById(`summary${id}`);
-  const genresEl = document.getElementById(`genres${id}`);
+  // const genresEl = document.getElementById(`genres${id}`);
   if (titleEl) addMarkTags(titleEl);
   if (summaryEl) addMarkTags(summaryEl);
   // if (genresEl) addMarkTags(genresEl);
