@@ -111,9 +111,9 @@ const makePageForShows = (shows) => {
 
     titleShow.addEventListener("click", () => {
       const showId = getIdFromString(titleShow.id);
+      selectShow.value = showId;
       getAllEpisodes(showId);
     });
-
   });
 }
 
@@ -243,7 +243,6 @@ let searchItem = (allElements) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
     let searchText = e.target.value;
-
     let displayElements = allElements.filter((elem) => {
       return matchesSearchText(elem, searchText.toLowerCase());
     });
@@ -258,6 +257,7 @@ let searchItem = (allElements) => {
       } else {
         element.classList.remove("is-hidden");
         highlighter(elemId, searchText);
+        // setTimeout(highlighter(elemId, searchText), 10000);
       }
     });
     hideElements.map(makeElemId).forEach((elemId) => {
@@ -283,30 +283,15 @@ const numFormatter = (number) => (number < 10 ? "0" + number : number);
 const getIdFromString = (str) => str.match(/(\d+)/)[0];
 
 const highlighter = (id, inputText) => {  
-  // const elementBox = document.getElementById(id);
   const titleEl = document.getElementById(`title${id}`);
   const summaryEl = document.getElementById(`summary${id}`);
-
-      // if (inputText == "") {
-      //   titleEl.innerHTML.textContent;
-      //   summaryEl.innerHTML.textContent;
-      //   return;
-      // }
-
-  // titleEl.innerText.replace(/(<([^>]+)>)/gi, "");
-  // summaryEl.innerText.replace(/(<([^>]+)>)/gi, "");
-
-  // const genresEl = document.getElementById(`genres${id}`);
+  const genresEl = document.getElementById(`genres${id}`);
   if (titleEl) addMarkTags(titleEl);
   if (summaryEl) addMarkTags(summaryEl);
   // if (genresEl) addMarkTags(genresEl);
   
   function addMarkTags(el) {
     el.innerHTML.textContent;
-    // el.innerText.replace(/(<([^>]+)>)/gi, "");
-    // if (inputText === "") {
-    //   return;
-    // }
     if (inputText !== null) {
       let reg = new RegExp(inputText, "gi");
       el.innerHTML = el.innerText.replace(reg, function (str) {
@@ -319,240 +304,5 @@ const highlighter = (id, inputText) => {
 document.getElementById("homeBtn").addEventListener("click", (e) => {
   searchBar.value = "";
   selectShow.value = "all";
-  // selectEpisode.value = "all";
   getAllShows();
 });
-
-  //=====================================
-
-
-
-
-
-  // const rootElem = document.getElementById("root");
-  // const allEpisodes = getAllEpisodes();
-  // const searchBar = document.getElementById("searchbar");
-  // const selectEpisode = document.getElementById("selectEpisodeList");
-  // const displayNumOfEp = document.getElementById("displayNumOfEpisodes");
-
-  // function setup() {
-  //   makePageForEpisodes(allEpisodes);
-  //   makeSelectorForEpisodes(allEpisodes);
-  //   searchItem();
-
-  //   displayNumOfEp.innerText = `Displaying ${allEpisodes.length} episodes`;
-  // }
-  // window.onload = setup;
-
-  // function makePageForEpisodes(episodeList) {
-  //   episodeList.forEach((episode) => {
-  //     const episodeBox = document.createElement("div");
-  //     episodeBox.classList.add("episode-box");
-  //     episodeBox.id = episode.id;
-
-  //     const titleEpisodeBox = document.createElement("div");
-  //     const titleEpisode = document.createElement("h3");
-  //     titleEpisode.classList.add("episode-title");
-  //     titleEpisode.innerText = `${episode.name} - S${numFormatter(
-  //       episode.season
-  //     )}E${numFormatter(episode.number)}`;
-  //     titleEpisodeBox.appendChild(titleEpisode);
-
-  //     const imgEpisodeBox = document.createElement("div");
-  //     const imgEpisode = document.createElement("img");
-  //     imgEpisode.src = episode.image.medium;
-  //     imgEpisode.alt = `image of episode - ${episode.name}`;
-  //     imgEpisodeBox.appendChild(imgEpisode);
-
-  //     const summaryEpisodeBox = document.createElement("div");
-  //     const summaryEpisode = document.createElement("p");
-  //     summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");
-  //     summaryEpisode.classList.add("episode-summary");
-  //     summaryEpisodeBox.appendChild(summaryEpisode);
-
-  //     episodeBox.append(titleEpisodeBox, imgEpisodeBox, summaryEpisodeBox);
-
-  //     if (rootElem) rootElem.append(episodeBox);
-  //   });
-  // }
-
-  // function makeSelectorForEpisodes(episodeList) {
-  //   episodeList.forEach((episode) => {
-  //     const optionEp = document.createElement("option");
-  //     optionEp.value = episode.id;
-  //     optionEp.innerText = `S${numFormatter(episode.season)}E${numFormatter(
-  //       episode.number
-  //     )} - ${episode.name}`;
-  //     selectEpisode.appendChild(optionEp);
-  //   });
-
-  //   selectEpisode.addEventListener("change", (selectedEl) => {
-  //     if (selectedEl === null)
-  //       console.warn("could not find element using id: " + selectedEl.id);
-  //     // if (selectedEl.target.value === "none") searchBar.value = "";
-  //     allEpisodes.forEach((episode) => {
-  //       const elem = document.getElementById(episode.id);
-  //       selectedEl.target.value !== elem.id
-  //         ? elem.classList.add("is-hidden")
-  //         : elem.classList.remove("is-hidden");
-  //     });
-  //   });
-  // }
-
-  // const matchesSearchText = (episode, targetItem) => {
-  //   return (
-  //     episode.name.toLowerCase().includes(targetItem) ||
-  //     episode.summary.toLowerCase().includes(targetItem)
-  //   );
-  // };
-
-  // let searchItem = () => {
-  //   // let searchBar = document.getElementById("searchbar");
-  //   if (!searchBar) return;
-  //   searchBar.addEventListener("input", (e) => {
-  //     if (e.target === null) return;
-  //     if (!(e.target instanceof HTMLInputElement)) return;
-
-  //     let searchText = e.target.value;
-
-  //     let showEpisodes = allEpisodes.filter((episode) => {
-  //       return matchesSearchText(episode, searchText.toLowerCase());
-  //     });
-  //     let hideEpisodes = allEpisodes.filter((episode) => {
-  //       return !matchesSearchText(episode, searchText.toLowerCase());
-  //     });
-
-  //     // displayNumOfEp.innerText = `Displaying ${showEpisodes.length}/${allEpisodes.length} episodes`;
-
-  //     showEpisodes.forEach((elem) => {
-  //       const element = document.getElementById(elem.id);
-  //       if (element === null) {
-  //         console.warn("could not find element using id: " + elem.id);
-  //       } else {
-  //         element.classList.remove("is-hidden");
-  //       }
-  //     });
-  //     hideEpisodes.forEach((elem) => {
-  //       const element = document.getElementById(elem.id);
-  //       if (element === null) {
-  //         console.warn("could not find element using id: " + elem.id);
-  //       } else {
-  //         element.classList.add("is-hidden");
-  //       }
-  //     });
-  //   });
-  // };
-
-  // searchItem();
-
-  // const numFormatter = (number) => (number < 10 ? "0" + number : number);
-
-  // document
-  //   .getElementById("clearBtn")
-  //   .addEventListener("click", () => (searchBar.value = ""));
-
-
-
-  //============================================
-
-
-// const hideElements = (elements) => {
-//   elements.forEach((elem) => {
-//     const element = document.getElementById(elem.id);
-//     if (element === null) {
-//       console.warn("could not find element using id: " + elem.id);
-//     } else {
-//       element.classList.add("is-hidden");
-//     }
-//   });
-// }
-
-// const showAllElements = (elements) => {
-//   elements.forEach((elem) => {
-//     const element = document.getElementById(elem.id);
-//     if (element === null) {
-//       console.warn("could not find element using id: " + elem.id);
-//     } else {
-//       element.classList.remove("is-hidden");
-//     }
-//   });
-// }
-
-//============= last version - with bugs
-
-// let searchItem = (allElements) => {
-//   if (!searchBar) return;
-//   searchBar.addEventListener("input", (e) => {
-//     if (e.target === null) return;
-//     if (!(e.target instanceof HTMLInputElement)) return;
-
-//     let searchText = e.target.value;
-
-//     let displayElements = allElements.filter((elem) => {
-//       return matchesSearchText(elem, searchText.toLowerCase());
-//     });
-//     let hideElements = allElements.filter((elem) => {
-//       return !matchesSearchText(elem, searchText.toLowerCase());
-//     });
-
-//     displayElements.map(makeElemId).forEach((elemId) => {
-//       const element = document.getElementById(elemId);
-//       if (element === null) {
-//         console.warn("could not find element using id: " + elemId);
-//       } else {
-//         element.classList.remove("is-hidden");
-//         highlighter(elemId, searchText);
-//       }
-//     });
-//     hideElements.map(makeElemId).forEach((elemId) => {
-//       const element = document.getElementById(elemId);
-//       if (element === null) {
-//         console.warn("could not find element using id: " + elemId);
-//       } else {
-//         element.classList.add("is-hidden");
-//       }
-//     });
-//     selectEpisode.value = "all";
-//     displayNumOfEl(allElements.length, displayElements.length);
-//   });
-//   // return 0;
-// };
-
-
-//---------------- search works only for episodes
-
-  // let searchItem = () => {
-  //   // let searchBar = document.getElementById("searchbar");
-  //   if (!searchBar) return;
-  //   searchBar.addEventListener("input", (e) => {
-  //     if (e.target === null) return;
-  //     if (!(e.target instanceof HTMLInputElement)) return;
-
-  //     let searchText = e.target.value;
-
-  //     let displayEpisodes = allEpisodes.filter((episode) => {
-  //       return matchesSearchText(episode, searchText.toLowerCase());
-  //     });
-  //     let hideEpisodes = allEpisodes.filter((episode) => {
-  //       return !matchesSearchText(episode, searchText.toLowerCase());
-  //     });
-  //     displayEpisodes.map(makeElemId).forEach((elemId) => {
-  //       const element = document.getElementById(elemId);
-  //       if (element === null) {
-  //         console.warn("could not find element using id: " + elem.id);
-  //       } else {
-  //         element.classList.remove("is-hidden");
-  //         highlighter(elemId, searchText);
-  //       }
-  //     });
-  //     hideEpisodes.map(makeElemId).forEach((elemId) => {
-  //       const element = document.getElementById(elemId);
-  //       if (element === null) {
-  //         console.warn("could not find element using id: " + elem.id);
-  //       } else {
-  //         element.classList.add("is-hidden");
-  //       }
-  //     });
-  //     selectEpisode.value = "all";
-  //   });
-  // };
