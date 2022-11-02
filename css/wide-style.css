@@ -1,0 +1,15 @@
+@media only screen and (min-width: 1025px) {
+  .show-wrapper {
+    grid-template-columns: 13.1em auto 9.4em;
+    grid-template-rows: 2.5em auto;
+    grid-template-areas:
+      "img ttl inf"
+      "img sum inf";
+  }
+
+  .selector,
+  .input,
+  textarea {
+    width: 18em;
+  }
+}

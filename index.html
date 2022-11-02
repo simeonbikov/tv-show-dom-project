@@ -5,53 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TV Show Project | Simeon Bikov (simeonbikov)</title>
     <link href="css/style.css" rel="stylesheet" />
-    <link href="css/width-style.css" rel="stylesheet" />
+    <link href="css/medium-style.css" rel="stylesheet" />
+    <link href="css/wide-style.css" rel="stylesheet" />
     <link href="css/variables.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-  <header class="header">
-    <nav class="navigation">
-     <button id="homeBtn" class="home-btn"><i class="fa fa-home"></i>
-     </button>
-     <div class="fields-wrapper">
-      <div>
-      </div>
-        <div class="select-wrapper">
-          <select name="select-show" id="selectShow" class="selector">
-          </select>
+    <header class="header">
+      <nav class="navigation">
+        <button id="homeBtn" class="home-btn">
+          <i class="fa fa-home"></i>
+        </button>
+        <div class="fields-wrapper">
+          <div></div>
+          <div class="select-wrapper">
+            <select
+              name="select-show"
+              id="selectShow"
+              class="selector"
+            ></select>
+          </div>
+
+          <div class="select-wrapper">
+            <select
+              name="select-episode"
+              id="selectEpisode"
+              class="selector"
+            ></select>
+          </div>
+
+          <div class="input-wrapper">
+            <input
+              id="searchbar"
+              type="search"
+              class="input"
+              placeholder="search..."
+            />
+          </div>
         </div>
-
-        <div class="select-wrapper">
-          <select name="select-episode" id="selectEpisode" class="selector">
-          </select>
+        <div class="display-num-of-movies">
+          <p id="displayNumOfMovies"></p>
         </div>
+      </nav>
+    </header>
 
-        <div class="input-wrapper">
-          <input id="searchbar" type="search" class="input" placeholder="search..."/>
-        </div>
-      </div>
-      <div class="display-num-of-movies">
-        <p id="displayNumOfMovies"></p>
-     </div>
-    </nav>
+    <main class="container">
+      <div id="root" class="root-content"></div>
+    </main>
 
-  </header>
-  
-  <main class="container">
-    <div id="root" class="root-content">
-    </div>
-  </main>
-  
-  <footer>
-    <p>This content is from <a href="https://www.tvmaze.com/">tvmaze.com</a></p>
-  </footer>
+    <footer>
+      <p>
+        This content is from <a href="https://www.tvmaze.com/">tvmaze.com</a>
+      </p>
+    </footer>
 
-  <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
