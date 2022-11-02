@@ -10,8 +10,7 @@ let foundEl = allShows.length;
 
 const setup = () => {
   getAllShows();
-}
-
+};
 window.onload = setup;
 
 const getAllShows = () => {
@@ -20,7 +19,9 @@ const getAllShows = () => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error(`Encountered something unexpected: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Encountered something unexpected: ${response.status} ${response.statusText}`
+        );
       }
     })
     .then((data) => {
@@ -30,7 +31,7 @@ const getAllShows = () => {
       searchItem(allShows);
     })
     .catch((err) => console.log(err.message));
-}
+};
 
 const getAllEpisodes = (showId) => {
   fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
@@ -38,7 +39,9 @@ const getAllEpisodes = (showId) => {
       if (response.ok) {
         return response.json();
       } else {
-        throw new Error(`Encountered something unexpected: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Encountered something unexpected: ${response.status} ${response.statusText}`
+        );
       }
     })
     .then((data) => {
@@ -48,7 +51,7 @@ const getAllEpisodes = (showId) => {
       searchItem(allEpisodes);
     })
     .catch((err) => console.log(err.message));
-}
+};
 
 const makePageForShows = (shows) => {
   rootElem.innerHTML = "";
@@ -57,34 +60,27 @@ const makePageForShows = (shows) => {
   rootElem.innerHTML = "";
   shows.forEach((show) => {
     const showBox = document.createElement("div");
-    // showBox.classList.add("show-box");
     showBox.id = show.id;
-
     const showWrapper = document.createElement("div");
     showWrapper.classList.add("show-wrapper");
-
     showWrapper.style.backgroundImage = `linear-gradient(to right bottom, hsla(0, 0%, 0%, 0.8), hsla(46, 100%, 50%, 0.8)), url(${show.image.original})`;
-
     const titleShowBox = document.createElement("div");
     titleShowBox.classList.add("title-show-box");
     const titleShow = document.createElement("h2");
     titleShow.classList.add("title-show");
     titleShow.innerText = show.name;
     titleShow.id = `title${show.id}`;
-
     const imgShowBox = document.createElement("div");
     imgShowBox.classList.add("img-show-box");
     const imgShow = document.createElement("img");
     imgShow.src = show.image.medium;
     imgShow.alt = `image of show - ${show.name}`;
-
     const summaryShowBox = document.createElement("div");
     summaryShowBox.classList.add("summary-show-box");
     const summaryShow = document.createElement("p");
     summaryShow.innerText = show.summary.replace(/(<([^>]+)>)/gi, "");
     summaryShow.classList.add("summary-show");
     summaryShow.id = `summary${show.id}`;
-
     const infoShowBox = document.createElement("div");
     infoShowBox.classList.add("info-show-box");
     const infoShowList = document.createElement("ul");
@@ -98,7 +94,6 @@ const makePageForShows = (shows) => {
     genresShow.id = `genres${show.id}`;
     statusShow.innerText = `Status: ${show.status}`;
     runtimeShow.innerText = `Runtime: ${show.runtime}`;
-
     if (rootElem) rootElem.append(showBox);
     showBox.append(showWrapper);
     showWrapper.append(titleShowBox, imgShowBox, summaryShowBox, infoShowBox);
@@ -115,7 +110,7 @@ const makePageForShows = (shows) => {
       getAllEpisodes(showId);
     });
   });
-}
+};
 
 const makePageForEpisodes = (episodes) => {
   rootElem.innerHTML = "";
@@ -124,32 +119,27 @@ const makePageForEpisodes = (episodes) => {
 
   episodes.forEach((episode) => {
     const episodeBox = document.createElement("div");
-    // episodeBox.classList.add("episode-box");
     episodeBox.id = episode.id;
-
     const episodeWrapper = document.createElement("div");
     episodeWrapper.classList.add("episode-wrapper");
-
     const titleEpisodeBox = document.createElement("div");
     titleEpisodeBox.classList.add("title-episode-box");
     const titleEpisode = document.createElement("h3");
     titleEpisode.id = `title${episode.id}`;
     titleEpisode.classList.add("title-episode");
-    titleEpisode.innerText = `${episode.name} - S${numFormatter(episode.season)}E${numFormatter(episode.number)}`;
-
+    titleEpisode.innerText = 
+      `${episode.name} - S${numFormatter(episode.season)}E${numFormatter(episode.number)}`;
     const imgEpisodeBox = document.createElement("div");
     imgEpisodeBox.classList.add("img-episode-box");
     const imgEpisode = document.createElement("img");
     imgEpisode.src = episode.image.medium;
     imgEpisode.alt = `image of episode - ${episode.name}`;
-
     const summaryEpisodeBox = document.createElement("div");
     summaryEpisodeBox.classList.add("summary-episode-box");
     const summaryEpisode = document.createElement("p");
     summaryEpisode.id = `summary${episode.id}`;
     summaryEpisode.innerText = episode.summary.replace(/(<([^>]+)>)/gi, "");
     summaryEpisode.classList.add("episode-summary");
-
     if (rootElem) rootElem.append(episodeBox);
     episodeBox.append(episodeWrapper);
     episodeWrapper.append(titleEpisodeBox, imgEpisodeBox, summaryEpisodeBox);
@@ -167,9 +157,8 @@ const makePageForEpisodes = (episodes) => {
           : elem.classList.remove("is-hidden");
       });
     });
-  
   });
-}
+};
 
 const makeSelectorForShows = (shows) => {
   const optionAllShows = document.createElement("option");
@@ -193,7 +182,7 @@ const makeSelectorForShows = (shows) => {
     }
     searchBar.value = "";
   });
-}
+};
 
 const makeSelectorForEpisodes = (episodes) => {
   selectEpisode.innerHTML = "";
@@ -218,32 +207,27 @@ const makeSelectorForEpisodes = (episodes) => {
     }
     allEpisodes.map(makeElemId).forEach((elemId) => {
       const elem = document.getElementById(elemId);
-      selectedEl.target.value !== elem.id &&
-      selectedEl.target.value !== "all"
+      selectedEl.target.value !== elem.id && selectedEl.target.value !== "all"
         ? elem.classList.add("is-hidden")
         : elem.classList.remove("is-hidden");
     });
-
-  displayNumOfEl(episodes.length, 1);
-  searchBar.value = "";
+    displayNumOfEl(episodes.length, 1);
+    searchBar.value = "";
   });
-}
+};
 
 const matchesSearchText = (element, targetItem) => {
   return (
     element.name.toLowerCase().includes(targetItem) ||
-    element.summary.toLowerCase().includes(targetItem) //||
-    // show.genres.toLowerCase().includes(targetItem)
+    element.summary.toLowerCase().includes(targetItem)
   );
 };
 
 let searchItem = (allElements) => {
-  console.log(allElements.length);
   if (!searchBar) return;
   searchBar.addEventListener("input", (e) => {
     if (e.target === null) return;
     if (!(e.target instanceof HTMLInputElement)) return;
-
     let searchText = e.target.value;
     let displayElements = allElements.filter((elem) => {
       return matchesSearchText(elem, searchText.toLowerCase());
@@ -251,23 +235,22 @@ let searchItem = (allElements) => {
     let hideElements = allElements.filter((elem) => {
       return !matchesSearchText(elem, searchText.toLowerCase());
     });
-
     displayElements.map(makeElemId).forEach((elemId) => {
       const element = document.getElementById(elemId);
       if (element !== null) {
         element.classList.remove("is-hidden");
         highlighter(elemId, searchText);
-        // setTimeout(highlighter(elemId, searchText), 10000);
-      // } else { 
-      //   return;
+      } else {
+        counter++;
+        return;
       }
     });
     hideElements.map(makeElemId).forEach((elemId) => {
       const element = document.getElementById(elemId);
       if (element !== null) {
         element.classList.add("is-hidden");
-      // } else {
-      //   return;
+      } else {
+        return;
       }
     });
     selectEpisode.value = "all";
@@ -278,18 +261,10 @@ let searchItem = (allElements) => {
 const displayNumOfEl = (allEl, foundEl) =>
   (displayNum.innerText = `Displaying ${foundEl} of ${allEl}`);
 
-const makeElemId = (element) => element.id;
-
-const numFormatter = (number) => (number < 10 ? "0" + number : number);
-
-const getIdFromString = (str) => str.match(/(\d+)/)[0];
-
-const highlighter = (id, inputText) => {  
+const highlighter = (id, inputText) => {
   const titleEl = document.getElementById(`title${id}`);
   const summaryEl = document.getElementById(`summary${id}`);
-  // const genresEl = document.getElementById(`genres${id}`);
-  // if (genresEl) addMarkTags(genresEl);
-  
+
   const addMarkTags = (el) => {
     el.innerHTML.textContent;
     if (inputText !== null) {
@@ -298,10 +273,16 @@ const highlighter = (id, inputText) => {
         return `<mark>${str}</mark>`;
       });
     }
-  }
+  };
   if (titleEl) addMarkTags(titleEl);
   if (summaryEl) addMarkTags(summaryEl);
-}
+};
+
+const makeElemId = (element) => element.id;
+
+const numFormatter = (number) => (number < 10 ? "0" + number : number);
+
+const getIdFromString = (str) => str.match(/(\d+)/)[0];
 
 document.getElementById("homeBtn").addEventListener("click", (e) => {
   searchBar.value = "";
