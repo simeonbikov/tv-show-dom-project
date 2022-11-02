@@ -171,7 +171,6 @@ const makePageForEpisodes = (episodes) => {
 }
 
 const makeSelectorForShows = (shows) => {
-  // const selectShow = document.getElementById("selectShow");
   const optionAllShows = document.createElement("option");
   optionAllShows.value = "all";
   optionAllShows.innerText = "All shows";
@@ -196,7 +195,6 @@ const makeSelectorForShows = (shows) => {
 }
 
 const makeSelectorForEpisodes = (episodes) => {
-  // const selectEpisode = document.getElementById("selectEpisode");
   selectEpisode.innerHTML = "";
   const optionAllEp = document.createElement("option");
   optionAllEp.value = "all";
@@ -284,10 +282,20 @@ const numFormatter = (number) => (number < 10 ? "0" + number : number);
 
 const getIdFromString = (str) => str.match(/(\d+)/)[0];
 
-const highlighter = (id, inputText) => {
+const highlighter = (id, inputText) => {  
   // const elementBox = document.getElementById(id);
   const titleEl = document.getElementById(`title${id}`);
   const summaryEl = document.getElementById(`summary${id}`);
+
+      // if (inputText == "") {
+      //   titleEl.innerHTML.textContent;
+      //   summaryEl.innerHTML.textContent;
+      //   return;
+      // }
+
+  // titleEl.innerText.replace(/(<([^>]+)>)/gi, "");
+  // summaryEl.innerText.replace(/(<([^>]+)>)/gi, "");
+
   // const genresEl = document.getElementById(`genres${id}`);
   if (titleEl) addMarkTags(titleEl);
   if (summaryEl) addMarkTags(summaryEl);
@@ -295,7 +303,11 @@ const highlighter = (id, inputText) => {
   
   function addMarkTags(el) {
     el.innerHTML.textContent;
-    if (inputText !== "") {
+    // el.innerText.replace(/(<([^>]+)>)/gi, "");
+    // if (inputText === "") {
+    //   return;
+    // }
+    if (inputText !== null) {
       let reg = new RegExp(inputText, "gi");
       el.innerHTML = el.innerText.replace(reg, function (str) {
         return `<mark>${str}</mark>`;
