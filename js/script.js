@@ -241,7 +241,6 @@ let searchItem = (allElements) => {
         element.classList.remove("is-hidden");
         highlighter(elemId, searchText);
       } else {
-        counter++;
         return;
       }
     });
@@ -269,9 +268,7 @@ const highlighter = (id, inputText) => {
     el.innerHTML.textContent;
     if (inputText !== null) {
       let reg = new RegExp(inputText, "gi");
-      el.innerHTML = el.innerText.replace(reg, function (str) {
-        return `<mark>${str}</mark>`;
-      });
+      el.innerHTML = el.innerText.replace(reg, (str) => `<mark>${str}</mark>`);
     }
   };
   if (titleEl) addMarkTags(titleEl);
