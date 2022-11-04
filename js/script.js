@@ -18,11 +18,8 @@ const getAllShows = () => {
     .then((response) => {
       if (response.ok) {
         return response.json();
-      } else {
-        throw new Error(
-          `Encountered something unexpected: ${response.status} ${response.statusText}`
-        );
       }
+      return Promise.reject(response);
     })
     .then((data) => {
       allShows = data.sort((a, b) => a.name.localeCompare(b.name));
@@ -259,21 +256,6 @@ let searchItem = (allElements) => {
 
 const displayNumOfEl = (allEl, foundEl) =>
   (displayNum.innerText = `Displaying ${foundEl} of ${allEl}`);
-
-// const highlighter = (id, inputText) => {
-//   const titleEl = document.getElementById(`title${id}`);
-//   const summaryEl = document.getElementById(`summary${id}`);
-
-//   const addMarkTags = (el) => {
-//     el.innerHTML.textContent;
-//     if (inputText !== null) {
-//       let reg = new RegExp(inputText, "gi");
-//       el.innerHTML = el.innerText.replace(reg, (str) => `<mark>${str}</mark>`);
-//     }
-//   };
-//   if (titleEl) addMarkTags(titleEl);
-//   if (summaryEl) addMarkTags(summaryEl);
-// };
 
 const makeElemId = (element) => element.id;
 
